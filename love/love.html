@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="love.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Muli");
+
+     * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* background-color: #f5f4f1; */
+            text-align: center;
+            
+        }
+        .stage {
+            position: relative;
+            min-height: 50vh;
+            width: 800px;
+            margin: 100px;
+        }
+        .love-wrap {
+            position: absolute;
+            left: 0;
+            margin-top: 0;
+            top: 0;
+        }
+
+        .love-wrap .love {
+            width: 34px;
+            height: 34px;
+            position: relative;
+            display: inline-block;
+            font-size: 0;
+            -webkit-transform: rotate(30deg);
+            -moz-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+
+        .love-wrap .love .circle {
+            background-color: #fe1239;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .love-wrap .love .circle1 {
+            left: 0;
+            bottom: 0;
+        }
+
+        .love-wrap .love .circle2 {
+            right: 0;
+            top: 0;
+        }
+
+        .love-wrap .love .square {
+            background-color: #fe1239;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            bottom: 0;
+        }
+
+        .love-front {
+            position: absolute;
+            right: 24%;
+            bottom: 30%;
+            z-index: 8;
+            -webkit-transform: rotate(50deg);
+            -moz-transform: rotate(50deg);
+            transform: rotate(50deg);
+        }
+
+        .love-front .love-wrap {
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+
+        .love-front .love-wrap:nth-child(1) {
+            -webkit-animation: love1 5s infinite ease-in 0.5s;
+            -moz-animation: love1 5s infinite ease-in 0.5s;
+            animation: love1 5s infinite ease-in 0.5s;
+        }
+
+        .love-front .love-wrap:nth-child(2) {
+            -webkit-animation: love1 5s infinite ease-in 1s;
+            -moz-animation: love1 5s infinite ease-in 1s;
+            animation: love1 5s infinite ease-in 1s;
+        }
+
+        .love-front .love-wrap:nth-child(3) {
+            -webkit-animation: love1 5s infinite ease-in 1.5s;
+            -moz-animation: love1 5s infinite ease-in 1.5s;
+            animation: love1 5s infinite ease-in 1.5s;
+        }
+
+        .love-front .love-wrap:nth-child(4) {
+            -webkit-animation: love1 5s infinite ease-in 2s;
+            -moz-animation: love1 5s infinite ease-in 2s;
+            animation: love1 5s infinite ease-in 2s;
+        }
+
+        .love-front .love-wrap:nth-child(5) {
+            -webkit-animation: love2 6s infinite ease-in 2.5s;
+            -moz-animation: love2 6s infinite ease-in 2.5s;
+            animation: love2 6s infinite ease-in 2.5s;
+        }
+
+        .love-front .love-wrap:nth-child(6) {
+            -webkit-animation: love2 6s infinite ease-in 3s;
+            -moz-animation: love2 6s infinite ease-in 3s;
+            animation: love2 6s infinite ease-in 3s;
+        }
+
+        .love-front .love-wrap:nth-child(7) {
+            -webkit-animation: love2 6s infinite ease-in 3.5s;
+            -moz-animation: love2 6s infinite ease-in 3.5s;
+            animation: love2 6s infinite ease-in 3.5s;
+        }
+
+        .love-front .love-wrap:nth-child(8) {
+            -webkit-animation: love2 6s infinite ease-in 4s;
+            -moz-animation: love2 6s infinite ease-in 4s;
+            animation: love2 6s infinite ease-in 4s;
+        }
+
+        .love-front .love-wrap:nth-child(9) {
+            -webkit-animation: love3 4s infinite ease-in 4.5s;
+            -moz-animation: love3 4s infinite ease-in 4.5s;
+            animation: love3 4s infinite ease-in 4.5s;
+        }
+
+        .love-front .love-wrap:nth-child(10) {
+            -webkit-animation: love3 4s infinite ease-in 5s;
+            -moz-animation: love3 4s infinite ease-in 5s;
+            animation: love3 4s infinite ease-in 5s;
+        }
+
+        .love-front .love-wrap:nth-child(11) {
+            -webkit-animation: love3 4s infinite ease-in 5.5s;
+            -moz-animation: love3 4s infinite ease-in 5.5s;
+            animation: love3 4s infinite ease-in 5.5s;
+        }
+
+        .love-front .love-wrap:nth-child(12) {
+            -webkit-animation: love3 4s infinite ease-in 6s;
+            -moz-animation: love3 4s infinite ease-in 6s;
+            animation: love3 4s infinite ease-in 6s;
+        }
+
+        .love-back {
+            position: absolute;
+            left: 18%;
+            bottom: 20%;
+            z-index: 5;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+
+        .love-back .love {
+            -webkit-transform: rotate(100deg);
+            -moz-transform: rotate(100deg);
+            transform: rotate(100deg);
+        }
+
+        .love-back .love-wrap {
+            right: 0;
+        }
+
+        .love-back .love-wrap:nth-child(1) {
+            -webkit-animation: love4 4s infinite ease-in 0.5s;
+            -moz-animation: love4 4s infinite ease-in 0.5s;
+            animation: love4 4s infinite ease-in 0.5s;
+        }
+
+        .love-back .love-wrap:nth-child(2) {
+            -webkit-animation: love4 4s infinite ease-in 1s;
+            -moz-animation: love4 4s infinite ease-in 1s;
+            animation: love4 4s infinite ease-in 1s;
+        }
+
+        .love-back .love-wrap:nth-child(3) {
+            -webkit-animation: love4 4s infinite ease-in 1.5s;
+            -moz-animation: love4 4s infinite ease-in 1.5s;
+            animation: love4 4s infinite ease-in 1.5s;
+        }
+
+        .love-back .love-wrap:nth-child(4) {
+            -webkit-animation: love4 4s infinite ease-in 2s;
+            -moz-animation: love4 4s infinite ease-in 2s;
+            animation: love4 4s infinite ease-in 2s;
+        }
+
+        .love-back .love-wrap:nth-child(1) {
+            -webkit-animation: love4 4s infinite ease-in 0s;
+            -moz-animation: love4 4s infinite ease-in 0s;
+            animation: love4 4s infinite ease-in 0s;
+        }
+
+        .love-back .love-wrap:nth-child(5) {
+            -webkit-animation: love5 3s infinite ease-in 2.5s;
+            -moz-animation: love5 3s infinite ease-in 2.5s;
+            animation: love5 3s infinite ease-in 2.5s;
+        }
+
+        .love-back .love-wrap:nth-child(6) {
+            -webkit-animation: love5 3s infinite ease-in 3s;
+            -moz-animation: love5 3s infinite ease-in 3s;
+            animation: love5 3s infinite ease-in 3s;
+        }
+
+        .love-back .love-wrap:nth-child(7) {
+            -webkit-animation: love5 3s infinite ease-in 3.5s;
+            -moz-animation: love5 3s infinite ease-in 3.5s;
+            animation: love5 3s infinite ease-in 3.5s;
+        }
+
+        .love-back .love-wrap:nth-child(8) {
+            -webkit-animation: love5 3s infinite ease-in 4s;
+            -moz-animation: love5 3s infinite ease-in 4s;
+            animation: love5 3s infinite ease-in 4s;
+        }
+
+        @-webkit-keyframes love1 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                -moz-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+            }
+        }
+
+        @-moz-keyframes love1 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                -moz-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+            }
+        }
+
+        @-ms-keyframes love1 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                -moz-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+            }
+        }
+
+        @keyframes love1 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.2) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                -moz-transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+                transform: scale(0.8) rotate(-40deg) translate3d(-50px, -400px, 0);
+            }
+        }
+
+        @-webkit-keyframes love2 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                -moz-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+            }
+        }
+
+        @-moz-keyframes love2 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                -moz-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+            }
+        }
+
+        @-ms-keyframes love2 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                -moz-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+            }
+        }
+
+        @keyframes love2 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                -moz-transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+                transform: scale(0.7) rotate(-50deg) translate3d(-80px, -450px, 0);
+            }
+        }
+
+        @-webkit-keyframes love3 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                -moz-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+            }
+        }
+
+        @-moz-keyframes love3 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                -moz-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+            }
+        }
+
+        @-ms-keyframes love3 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                -moz-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+            }
+        }
+
+        @keyframes love3 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                -moz-transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+                transform: scale(0.3) rotate(0deg) translate3d(100px, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                -moz-transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+                transform: scale(0.65) rotate(-60deg) translate3d(-40px, -400px, 0);
+            }
+        }
+
+        @-webkit-keyframes love4 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                -moz-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+            }
+        }
+
+        @-moz-keyframes love4 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                -moz-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+            }
+        }
+
+        @-ms-keyframes love4 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                -moz-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+            }
+        }
+
+        @keyframes love4 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                -moz-transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+                transform: scale(0.6) rotate(-25deg) translate3d(100px, -200px, 0);
+            }
+        }
+
+        @-webkit-keyframes love5 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                -moz-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+            }
+        }
+
+        @-moz-keyframes love5 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                -moz-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+            }
+        }
+
+        @-ms-keyframes love5 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                -moz-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+            }
+        }
+
+        @keyframes love5 {
+            0% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                -moz-transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+                transform: scale(0.2) rotate(0) translate3d(0, 0, 0);
+            }
+
+            50% {
+                -webkit-opacity: 1;
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-opacity: 0;
+                -moz-opacity: 0;
+                opacity: 0;
+                -webkit-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                -moz-transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+                transform: scale(0.5) rotate(-20deg) translate3d(200px, -250px, 0);
+            }
+        }
+         body {
+            font-family: "Muli", sans-serif;
+        }
+  </style>
+</head>
+<body>
+<audio id="bg-music" loop muted>
+  <source src="../../audio/audio.mp3" type="audio/mp3">
+</audio>
+
+    <div class="wrapper">
+        <div class="formInput">  
+            <div class="boxHands">
+                <div class="handsCat">
+                    <img src="../image/handsCat.png" alt="">
+                </div>
+                <h1>Nhớ mở thư nha</h1>
+            </div>
+            <div class="boxSlider">
+                    <div class="listSlider">
+                        <div class="slider">
+                            <img src="../image/love1.jfif" alt="">
+                        </div>
+                        <div class="slider">
+                            <img src="../image/love2.png" alt="">
+                        </div>
+                    </div>
+                <div class="left">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <div class="right">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="boxHandsInput">
+                <div class="handsCatImgInput">
+                    <img src="../image/handsCat.png" alt="">
+                </div>
+                <input type="text" id="inputField" placeholder="" readonly style="text-align: center;">
+            </div>
+            <div class="buttonLove">
+                <div class="cricleBtn"></div>
+                <div class="button"></div>
+            </div>
+        </div>
+        
+        <div class="boxLine">
+             <!-- test  --> 
+        <div class='stage'>
+            <div class='love-front'>    
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class='love-back'>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                    <div class='love-wrap'>
+                        <div class='love'>
+                            <span class='circle circle1'></span>
+                            <span class='circle circle2'></span>
+                            <span class='square'></span>
+                        </div>
+                    </div>
+                </div>
+                <h1 style="
+                    position: absolute;
+                    top: 85%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 3rem;
+                    color: indianred;
+                    /* font-family: cursive; */
+                    ">
+                    you are not alone
+                </h1>
+
+        </div>
+            <div class="boxCar">      
+                <img src="../image/carq.gif" alt="" >
+            </div>
+            
+            <div class="boxHeart">
+                <div class="heart1"></div>
+                <div class="heart2"></div>
+                <div class="heart3"></div>
+                <div class="heart4"></div>
+                <div class="heart5"></div>
+                <div class="heart6"></div>
+            </div>
+            <div class="ground-line">
+                <div>
+                    <span class="line1"></span>
+                    <span class="line2"></span>
+                    <span class="line3"></span>
+                    <span class="line4"></span>
+                    <span class="line5"></span>
+                    <span class="line1"></span>
+                    <span class="line2"></span>
+                    <span class="line3"></span>
+                    <span class="line4"></span>
+                    <span class="line5"></span>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="loadingLove">
+        <div class="back"></div>
+        <div class="heart"></div>
+        
+    </div>
+
+    <div class="wrapperLetterForm">
+        <div class="boxLetter">
+            <i class="fa-solid fa-xmark"></i>
+            <div class="formLetter">
+                <div class="heartLetter">
+                    <div class="heartLetterItem"></div>
+                </div>
+                <div class="heartLetter">
+                    <div class="heartLetterItem"></div>
+                </div>
+                
+                <div class="wrapperLetter">
+                    <div class="giftbox">
+                        <div class="img">
+                            <img src="../image/giftbox.png" alt="">
+                        </div>
+                    </div>
+                    <div class="textLetter">
+                        <h2></h2>
+                        <p class="contentLetter"></p>
+                        <div class="heartAnimation">
+                            <img src="../image/heartAnimation.gif" alt="">
+                        </div>
+                    </div>
+                    <div class="mewmew1">
+                        <img src="../image/mewmew.gif" alt="">
+                    </div>
+                    <div class="mewmew2">
+                        <img src="../image/mewmew.gif" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="before"></div>
+        </div>
+    </div>
+    
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+ <script>
+    $(window).on('load', function(event){
+    $('body').removeClass('preloading');
+    $('.loadingLove').delay(1000).fadeOut('medium');
+
+        
+    function getHeart(e){
+        let ele = document.createElement("div");
+        ele.className = "element"
+        document.querySelector("body").prepend(ele)
+        ele.style.left = e.clientX + 'px';
+        ele.style.top = e.clientY -10 +'px';
+        setTimeout(()=>{
+            let text = document.querySelectorAll(".element")[0],
+            directionX = Math.random() < .5 ? -1 : 1,
+            directionY = Math.random() < .5 ? -1 : 1
+
+            text.style.left = parseInt(text.style.left) - (directionX * (Math.random() * 100)) + 'px';
+            text.style.top = parseInt(text.style.top) - (directionY * (Math.random() * 100)) + 'px';
+            text.style.opacity = 0;
+            text.style.transform = 'scale(0.4)'
+            text.innerHTML = "💗"
+            text.style.zIndex = "100"
+
+            setTimeout(()=>{
+                ele.remove()
+            },1000)
+        },10)
+    }
+    document.onmousemove = function(e){
+        getHeart(e)
+    }
+    document.onclick = function(e){
+        let ele = document.createElement("div");
+        ele.className = "heartRain"
+        document.querySelector("body").prepend(ele);
+        ele.style.left = e.clientX -10 + 'px';
+        ele.style.top = e.clientY -10 +'px';
+        ele.innerHTML = "💗"
+        setTimeout(()=>{
+            ele.style.top = "calc(85% - 25px)"
+        },100)
+        setTimeout(()=>{
+            ele.style.opacity = 0
+        },3000)
+        setTimeout(()=>{
+            ele.remove()
+        },4000)
+    }
+    document.onmousedown = (e)=>{
+        getHeart(e)
+    }
+
+    const inputField = document.getElementById('inputField');
+    const textToType = "Nguyễn Thị Hiền";
+    const typingSpeed = 110; // milliseconds per character
+
+    let charIndex = 0;
+    function typeText() {
+        if (charIndex < textToType.length) {
+            inputField.value += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeText, typingSpeed);
+        }
+        if(inputField.value.length == textToType.length){
+            setTimeout(()=>{
+                document.querySelector(".buttonLove").style.transform = "translateY(0%)";
+                document.querySelector(".cricleBtn").style.transform = "scale(0.1)"
+            },1000)
+            setTimeout(()=>{
+                document.querySelector(".cricleBtn").style.transform = "scale(1)"
+                document.querySelector(".cricleBtn").innerHTML = "💗"
+            },2000)
+            setTimeout(()=>{
+                document.querySelector(".buttonLove").style.width = "120px"
+                document.querySelector(".button").style.transform = "translateX(25px)"
+            },2500)
+            setTimeout(()=>{
+                document.querySelector(".button").style.width = "calc(100% - 25px)"
+                document.querySelector(".button").style.height = "10px"
+            },3000)
+            setTimeout(()=>{
+                document.querySelector(".button").style.height = "30px"
+            },3500)
+            setTimeout(()=>{
+                document.querySelector(".button").innerHTML = "Nhận thư"
+            },4000)
+        }
+    }
+
+    setTimeout(()=>{
+        typeText();
+    }, 11500)
+    });
+
+    // .textLetter text h2
+    let indexText = 0;
+    let textLetter = document.querySelector('.textLetter h2');
+    const textLetterH2 = "Gửi cậu!";
+    let timoutTextLetter;
+
+   let audio = new Audio("../../audio/audio.mp3");
+// audio.play();
+
+
+    function textCharLetter(){
+        if (indexText < textLetterH2.length) {
+            textLetter.textContent += textLetterH2[indexText];
+            indexText++;
+            setTimeout(indexText, 100);
+        }
+        else{
+            clearInterval(timoutTextLetter);
+            setTimeout(()=>{
+                funcTimeoutLetterContent()
+            },500)
+        }
+    }
+    function funcTimeoutLetter(){
+        indexText = 0; // Reset indexText
+        textLetter.textContent = ''; // Xóa nội dung hiện tại của textLetter
+        clearInterval(timoutTextLetter);
+        timoutTextLetter =  setInterval(()=>{
+                textCharLetter();
+            }, 200)
+    }
+
+    // chữ của thư bạn muốn gửi
+    let indexTextContent = 0;
+    let textLetterContent = document.querySelector('.contentLetter');
+    const textLetterP = "Được nhìn thấy cậu cười như vậy tớ thấy rất vui, cậu đã trải qua nhiều khó khăn mới được như vậy, tớ mong rằng cậu luôn hạnh phúc, luôn nở nụ cười đó trên môi. Chúc cậu sẽ gặp được nhiều may mắn, gặp được người yêu thương cậu thật lòng, Nếu có buồn thì hãy nói với tớ vì tớ luôn âm thầm ở bên cậu mà, Hãy tin rằng sau cơn mưa trời lại sáng, Hạnh phúc sẽ đến với cậu, Tớ tin vào điều đó và tớ mong rằng cậu cũng vậy.  " ;
+    let timoutTextLetterContent;
+    function textCharLetterContent(){
+        if (indexTextContent < textLetterP.length) {
+            textLetterContent.textContent += textLetterP[indexTextContent];
+            indexTextContent++;
+            setTimeout(indexTextContent, 150);
+        }
+        else{
+            clearInterval(timoutTextLetterContent)
+
+        }
+    }
+    function funcTimeoutLetterContent(){
+        indexTextContent = 0; // Reset indexTextContent
+        textLetterContent.textContent = ''; // Xóa nội dung hiện tại của textLetter
+        clearInterval(timoutTextLetterContent);
+        timoutTextLetterContent =  setInterval(()=>{
+            textCharLetterContent();
+            }, 100)
+    }
+    //end 
+    document.querySelector(".boxSlider .right").addEventListener("click", function(){
+        var slider = document.querySelectorAll(".slider")
+        document.querySelector(".listSlider").appendChild(slider[0])
+    })
+    document.querySelector(".boxSlider .left").addEventListener("click", function(){
+        var slider = document.querySelectorAll(".slider")
+        document.querySelector(".listSlider").prepend(slider[slider.length -1])
+    })
+
+    document.querySelector(".buttonLove").addEventListener("click", function(){
+        let timeout = setInterval(()=>{
+            var letters = document.createElement("div");
+            letters.className = "letters"
+            letters.innerHTML = '<img src="../image/letters.png" alt="">';
+            document.querySelector("body").prepend(letters)
+            let left = Math.floor(Math.random() * 100);
+            let rotate = Math.floor(Math.random() * 360);
+            letters.style.left = left + "%";
+            letters.style.top = "-10%";
+            letters.style.transform = `rotate(${rotate}deg)`;
+            setTimeout(()=>{
+                letters.style.top = "100%";
+            },1000)
+            setTimeout(()=>{
+                letters.remove()
+            },11000)
+            document.querySelectorAll(".letters").forEach((item)=>{
+                item.addEventListener("click", function(){
+                    clearInterval(timeout)
+                    $(".wrapperLetterForm").fadeIn()
+                    funcTimeoutLetter();
+
+                const music = document.getElementById('bg-music');
+                function tryPlayMusic() {
+                    music.muted = false;
+                    music.play().catch(e => {
+                    console.log("Play failed:", e);
+                    });
+                }
+
+                // Di chuột, click, hoặc nhấn phím đều có thể kích hoạt
+                ['mousemove', 'click', 'keydown'].forEach(evt => {
+                    window.addEventListener(evt, tryPlayMusic, { once: true });
+                });    
+                })
+            })
+            document.querySelectorAll(".buttonLove").forEach((item)=>{
+                item.addEventListener("click", function(){
+                    clearInterval(timeout);
+                    $(".wrapperLetterForm").fadeIn();
+                    funcTimeoutLetter();
+
+                    const music = document.getElementById('bg-music');
+                    // Bỏ muted nếu có
+                    music.muted = false;
+                    // Cố gắng phát nhạc
+                    music.play().catch(e => {
+                        console.log("Không thể phát nhạc tự động, cần thêm tương tác:", e);
+
+                        // Nếu phát thất bại, đợi thêm tương tác
+                        function tryPlayMusic() {
+                            music.play().catch(err => {
+                                console.log("Phát lại vẫn lỗi:", err);
+                            });
+                        }
+                        ['click', 'mousemove', 'keydown'].forEach(evt => {
+                            window.addEventListener(evt, tryPlayMusic, { once: true });
+                        });
+                    });
+                });
+            });
+
+        },500)
+    })
+    
+    // nút x 
+    document.querySelector(".fa-xmark").addEventListener("click", function(){
+        indexTextContent = 0; // Reset indexTextContent
+        textLetterContent.textContent = ''; // Xóa nội dung hiện tại của textLetter
+        clearInterval(timoutTextLetterContent)
+        $(".wrapperLetterForm").fadeOut()
+    })
+</script>
+</html>
