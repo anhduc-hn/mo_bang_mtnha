@@ -1242,9 +1242,7 @@
                     funcTimeoutLetter();
 
                     const music = document.getElementById('bg-music');
-                    // Bỏ muted nếu có
                     music.muted = false;
-                    // Cố gắng phát nhạc
                     music.play().catch(e => {
                         console.log("Không thể phát nhạc tự động, cần thêm tương tác:", e);
 
